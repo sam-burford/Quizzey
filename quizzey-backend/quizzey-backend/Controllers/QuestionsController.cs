@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using quizzey_backend.Models;
 
 namespace quizzey_backend.Controllers
@@ -21,17 +22,40 @@ namespace quizzey_backend.Controllers
 			return context.Questions;
 		}
 
-		[HttpPost]
-		public void Post([FromBody] Question question)
+		[HttpGet("{quizId}")]
+		public IEnumerable<Question> Get([FromRoute] int quizId)
 		{
+			return context.Questions.Where(q => q.QuizId == quizId);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Post([FromBody] Question question)
+		{
+			var quiz = context.Quiz.SingleOrDefault(q => q.Id == question.QuizId);
+
+			if (quiz == null)
+			{
+				return NotFound();
+			}
+
 			context.Questions.Add(question);
-			context.SaveChanges();
+			await context.SaveChangesAsync();
+			return Ok(question);
 		}
 
 		[HttpPut("{id}")]
-		public void Put(int id, [FromBody] Question question)
+		public async Task<IActionResult> Put(int id, [FromBody] Question question)
 		{
+			if (id != question.Id)
+			{
+				return BadRequest("Question ID does not match the URL parameter");
+			}
 
+			context.Entry(question).State = EntityState.Modified;
+
+			await context.SaveChangesAsync();
+
+			return Ok(question);
 		}
 
 	}

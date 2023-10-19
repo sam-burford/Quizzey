@@ -1,9 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { font-family: Roboto, "Helvetica Neue", sans-serif; }
+body
+{
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h2
+{
+	color: white;
+	text-align: left;
+	padding-left: 1rem;
+}
+
+.mdc-card
+{
+	padding: 10px !important;
+	margin: 10px auto !important;
+}
 
 .fullWidth
 {
 	width: 100%;
+}
+
+.clickLink
+{
+	cursor: pointer;
+}
+
+.clickLink:hover
+{
+	color: lightblue !important;
 }

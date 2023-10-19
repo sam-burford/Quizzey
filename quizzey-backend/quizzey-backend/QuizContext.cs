@@ -10,5 +10,7 @@ namespace quizzey_backend
 
         public DbSet<Question> Questions { get; set; }
 
+        public DbSet<quizzey_backend.Models.Quiz>? Quiz { get; set; }
+
     }
 }

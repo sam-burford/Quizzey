@@ -1,11 +1,11 @@
 <mat-card>
 	<mat-card-title>
-		<h2>All Questions</h2>
+		<h2>My Quizes</h2>
 	</mat-card-title>
 	<mat-card-content>
-		<mat-list role="list" *ngFor="let question of questions">
+		<mat-list role="list" *ngFor="let quiz of quizes">
 			<mat-list-item role="listitem">
-				<button (click)="api.selectQuestion(question)" mat-stroked-button>{{question.text}}</button>
+				<button (click)="api.selectQuiz(quiz)" mat-stroked-button>{{quiz.title}}</button>
 				</mat-list-item>
 		</mat-list>
 	</mat-card-content>
